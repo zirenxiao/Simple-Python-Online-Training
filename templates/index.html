@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Trainer</title>
+</head>
+<body>
+<p>
+<h1>Upload CSV Training File</h1>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" id="csv" name="csv">
+    <button type="submit">Upload</button>
+</form>
+</p>
+<p>
+<h1>Train</h1>
+<form action="/train" method="post" enctype="multipart/form-data">
+    <select name="algorithm">
+        <option value="SVM-C">SVM-C</option>
+    </select>
+    <select name="data">
+        {% for f in csv_files %}
+        <option value="{{f}}">{{f}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+</form>
+</p>
+<p>
+<h1>Test</h1>
+<form action="/test" method="post" enctype="multipart/form-data">
+    <select name="algorithm">
+        <option value="SVM-C">SVM-C</option>
+    </select>
+    <select name="data">
+        {% for f in model_files %}
+        <option value="{{f}}">{{f}}</option>
+        {% endfor %}
+    </select>
+    <br>Test Data (list of rows)<br><textarea cols="20" rows="10" name="inputdata" required>[[219,226,230,224.76257801553945,4.962083278727988,224.0]]</textarea>
+    <br><button type="submit">Submit</button>
+</form>
+</p>
+</body>
+</html>
+
